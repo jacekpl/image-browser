@@ -29,10 +29,7 @@ function App() {
     ];
 
     return <>
-        <div className="container mx-auto content-center">
-            <h1 className="inline-block mb-2 text-3xl font-extrabold tracking-tight text-gray-900 dark:text-white">
-                Image browser
-            </h1>
+        <div className="container row">
             <ImageViewer images={images}/>
         </div>
     </>
