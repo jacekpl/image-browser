@@ -1,7 +1,5 @@
 FROM node:18-alpine
 WORKDIR /app
-COPY package.json yarn.lock ./
-RUN yarn install --frozen-lockfile
 COPY . .
-RUN yarn build
-CMD ["yarn", "run", "dev", "--host"]
+CMD \[ -d "node_modules" \] && yarn run dev --host || yarn install --frozen-lockfile && yarn run dev --host
+

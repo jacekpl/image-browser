@@ -1,32 +1,24 @@
-import ImageViewer from "./components/ImageViewer.tsx";
+import ImageViewer from "./Domain/Image/ImageViewer.tsx";
+import {useQuery, useQueryClient} from "@tanstack/react-query";
+import axios from "axios";
 
 function App() {
-    const images: ImageInterface[] = [
-        {
-            src: "https://visma-checklist-dev.s3.eu-central-1.amazonaws.com/case/2/66279/42369af2-377f-4b5d-adb7-bc75f519d7b0.jpg",
-            alt: "jason-briscoe-1"
-        },
-        {
-            src: "https://visma-checklist-dev.s3.eu-central-1.amazonaws.com/case/2/66279/42369af2-377f-4b5d-adb7-bc75f519d7b0.jpg",
-            alt: "jason-briscoe-2"
-        },
-        {
-            src: "https://visma-checklist-dev.s3.eu-central-1.amazonaws.com/case/2/66279/7e31a53d-6aa5-4326-85ba-ac4dec4aa7d5.jpg",
-            alt: "jason-briscoe-3"
-        },
-        {
-            src: "https://visma-checklist-dev.s3.eu-central-1.amazonaws.com/case/2/66279/37add396-cb61-45d2-8886-7baf37c63f51.jpg",
-            alt: "jason-briscoe-4"
-        },
-        {
-            src: "https://visma-checklist-dev.s3.eu-central-1.amazonaws.com/case/2/66279/2e2f64d1-7f35-41db-8f27-18b8340615d5.jpg",
-            alt: "jason-briscoe-5"
-        },
-        {
-            src: "https://visma-checklist-dev.s3.eu-central-1.amazonaws.com/case/2/66279/6afef862-7f99-4ec4-83d7-04f5f6dd8610.jpg",
-            alt: "jason-briscoe-6"
-        },
-    ];
+    const queryClient = useQueryClient();
+
+    //https://pixabay.com/api/?key=&per_page=20
+    const fetchImages = () => {
+        return axios.get<ImageInterface[]>('https://jsonplaceholder.typicode.com/photos?albumId=1').then((response) => response.data);
+    }
+
+    const {isLoading, error, data} = useQuery<ImageInterface[]>({
+        queryKey: ['images'],
+        queryFn: fetchImages,
+    });
+
+    if (isLoading) return 'Loading...'
+    if (error) return 'An error has occurred: ' + error.message
+
+    const images: ImageInterface[] = data as ImageInterface[];
 
     return <>
         <div className="container row">
