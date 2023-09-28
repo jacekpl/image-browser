@@ -23,7 +23,7 @@ jobs:
         env:
           DIRECTORY: ${{ secrets.DIRECTORY }}
           SSH_KEY: ${{ secrets.SSH_KEY }}
-          SERVER: ${{ secrets.PRODUCTION_SERVER }}
+          SERVER: ${{ secrets.SERVER }}
         run: |
           mkdir -p ~/.ssh
           echo "${SSH_KEY}" | tr -d '\r' > ~/.ssh/id_rsa
