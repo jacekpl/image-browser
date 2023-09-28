@@ -1,10 +1,8 @@
 import ImageViewer from "./Domain/Image/ImageViewer.tsx";
-import {useQuery, useQueryClient} from "@tanstack/react-query";
+import {useQuery} from "@tanstack/react-query";
 import axios from "axios";
 
 function App() {
-    const queryClient = useQueryClient();
-
     //https://pixabay.com/api/?key=&per_page=20
     const fetchImages = () => {
         return axios.get<ImageInterface[]>('https://jsonplaceholder.typicode.com/photos?albumId=1').then((response) => response.data);
@@ -16,7 +14,7 @@ function App() {
     });
 
     if (isLoading) return 'Loading...'
-    if (error) return 'An error has occurred: ' + error.message
+    if (error) return 'An error has occurred: ' + error
 
     const images: ImageInterface[] = data as ImageInterface[];
 

@@ -1,0 +1,41 @@
+on:
+  push:
+    branches: [ main ]
+
+jobs:
+  build:
+    runs-on: ubuntu-22.04
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v3
+
+      - name: Setup Node
+        uses: actions/setup-node@v2
+        with:
+          node-version: '16.x'
+          cache: yarn
+
+      - name: Install dependencies
+        run: yarn install --frozen-lockfile
+
+      - name: Deploy
+        env:
+          DIRECTORY: ${{ secrets.DIRECTORY }}
+          SSH_KEY: ${{ secrets.SSH_KEY }}
+          SERVER: ${{ secrets.PRODUCTION_SERVER }}
+        run: |
+          mkdir -p ~/.ssh
+          echo "${SSH_KEY}" | tr -d '\r' > ~/.ssh/id_rsa
+          chmod 600 ~/.ssh/id_rsa
+          eval "$(ssh-agent -s)"
+          ssh-add ~/.ssh/id_rsa
+          eval "ssh-keyscan -H $SERVER" >> ~/.ssh/known_hosts
+          rm -rf .git .gitignore .github
+          zip -q -r artifact.zip .
+          eval "ssh ubuntu@$SERVER 'mkdir -p $DIRECTORY/var'"
+          eval "ssh ubuntu@$SERVER 'rm -rf $DIRECTORY.dist && mkdir -p $DIRECTORY.dist'"
+          eval "scp artifact.zip ubuntu@$SERVER:/home/ubuntu/$DIRECTORY.dist"
+          eval "ssh ubuntu@$SERVER 'cd $DIRECTORY.dist && unzip artifact.zip && rm artifact.zip'"
+          eval "ssh ubuntu@$SERVER 'rsync --exclude .env.local -r -v --delete $DIRECTORY.dist/ $DIRECTORY/'"
+          eval "ssh ubuntu@$SERVER 'rm -rf $DIRECTORY.dist'"
