@@ -1,6 +1,7 @@
 interface ImageInterface {
     id: number,
-    url: string,
-    thumbnailUrl: string,
-    title: string,
+    type: string,
+    previewURL: string,
+    webformatURL: string,
+    user: string,
 }
