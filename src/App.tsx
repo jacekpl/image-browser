@@ -4,7 +4,7 @@ import axios from "axios";
 
 function App() {
     const fetchImages = async () => {
-        const response = await axios.get('https://pixabay.com/api/?key=39676804-5edb90c96ed25e80d3dabf5a6&q=food&orientation=horizontal&per_page=10');
+        const response = await axios.get('https://pixabay.com/api/?key=39676804-5edb90c96ed25e80d3dabf5a6&q=food&orientation=horizontal&per_page=10&order=latest');
         return response.data;
     }
 
