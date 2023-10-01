@@ -1,12 +1,9 @@
 import ImageViewer from "./Domain/Image/ImageViewer.tsx";
-import {useQuery} from "@tanstack/react-query";
-import {fetchImages} from "./Domain/Fetcher/Pixabay/PixabayRequest.ts";
+import {UseQueryResult} from "@tanstack/react-query";
+import {useFetchImages} from "./Domain/Fetcher/Pixabay/PixabayRequest.ts";
 
 function App() {
-    const fetchImagesQuery = useQuery({
-        queryKey: ['images'],
-        queryFn: fetchImages,
-    });
+    const fetchImagesQuery: UseQueryResult<ImageInterface[]> = useFetchImages();
 
     if (fetchImagesQuery.isLoading) return 'Loading...'
     if (fetchImagesQuery.isError) return 'An error has occurred: ' + fetchImagesQuery.error.message

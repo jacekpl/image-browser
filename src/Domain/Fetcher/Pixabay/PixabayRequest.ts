@@ -1,5 +1,8 @@
 import axios from "axios";
 import * as z from "zod";
+import {useQuery} from "@tanstack/react-query";
+
+const PixabayImageListUrl = 'https://pixabay.com/api/?key=39676804-5edb90c96ed25e80d3dabf5a6&q=food&orientation=horizontal&per_page=10&order=latest';
 
 const ImageSchema = z.object({
     id: z.number(),
@@ -18,8 +21,15 @@ const ImagesListSchema = z.object({
 type ImagesListResponse = z.infer<typeof ImagesListSchema>;
 type ImageSchema = z.infer<typeof ImageSchema>;
 
-export const fetchImages = async (): Promise<ImageInterface[]> => {
-    const response = await axios.get('https://pixabay.com/api/?key=39676804-5edb90c96ed25e80d3dabf5a6&q=food&orientation=horizontal&per_page=10&order=latest');
+export function useFetchImages() {
+    return useQuery({
+        queryKey: ['images'],
+        queryFn: fetchImages,
+    });
+}
+
+const fetchImages = async (): Promise<ImageInterface[]> => {
+    const response = await axios.get(PixabayImageListUrl);
 
     try {
         ImagesListSchema.parse(response.data);
@@ -39,7 +49,7 @@ export const fetchImages = async (): Promise<ImageInterface[]> => {
         return singleImage;
     });
 
-    if(res !== undefined) {
+    if (res !== undefined) {
         return res;
     }
 
