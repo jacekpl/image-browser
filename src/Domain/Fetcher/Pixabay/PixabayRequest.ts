@@ -1,6 +1,7 @@
 import axios from "axios";
 import * as z from "zod";
 import {useQuery} from "@tanstack/react-query";
+import {ImageInterface} from "../../Image/ImageInterface.ts";
 
 const PixabayImageListUrl = 'https://pixabay.com/api/?key=39676804-5edb90c96ed25e80d3dabf5a6&q=food&orientation=horizontal&per_page=10&order=latest';
 

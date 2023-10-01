@@ -1,6 +1,7 @@
 import ImageViewer from "./Domain/Image/ImageViewer.tsx";
 import {UseQueryResult} from "@tanstack/react-query";
 import {useFetchImages} from "./Domain/Fetcher/Pixabay/PixabayRequest.ts";
+import {ImageInterface} from "./Domain/Image/ImageInterface.ts";
 
 function App() {
     const fetchImagesQuery: UseQueryResult<ImageInterface[]> = useFetchImages();
