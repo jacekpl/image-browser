@@ -1,4 +1,4 @@
-interface ImageInterface {
+export interface ImageInterface {
     id: number,
     type: string,
     previewURL: string,
