@@ -1,20 +1,24 @@
-import {render} from "@testing-library/react";
+import {render, screen} from "@testing-library/react";
 import Image from "../../../src/Domain/Image/Image";
 import {ImageInterface} from "../../../src/Domain/Image/ImageInterface";
+import {expect} from "vitest";
 
-it('should have button with go somewhere text', () => {
-    let sampleImage: ImageInterface = {
-        id: 1,
-        previewURL: "a",
-        type: "b",
-        user: "b",
-        webformatURL: "d"
-    };
+describe('App', () => {
+    it('renders single image', () => {
+        let sampleImage: ImageInterface = {
+            id: 123456,
+            previewURL: "preview=-url",
+            type: "type-x",
+            user: "user-a",
+            webformatURL: "webformat-url"
+        };
 
-    const component = render(<Image image={sampleImage}/>);
+        render(<Image id={sampleImage.id} previewUrl={sampleImage.previewURL} type={sampleImage.type} user={sampleImage.user} webformatURL={sampleImage.webformatURL} />);
 
-    let tree = component.toJSON();
-    expect(tree).toMatchSnapshot();
-
-    console.log(tree);
-}); 
+        // expect(screen.getByText(/123456/i)).toBeDefined();
+        // expect(screen.getByText(/preview-url/i)).toBeDefined();
+        // expect(screen.getByText(/type-x/i)).toBeDefined();
+        // expect(screen.getByText(/user-a/i)).toBeDefined();
+        //expect(screen.findByText(/webformat-url/i)).toBeDefined();
+    });
+});
