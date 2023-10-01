@@ -1,3 +1,5 @@
+import {ImageInterface} from "./ImageInterface.ts";
+
 function Image({webformatURL, previewURL, id, user, type}: ImageInterface) {
     return <>
         <div className="card" style={{width: "18rem"}}>
