@@ -6,7 +6,7 @@ function App() {
     const fetchImagesQuery: UseQueryResult<ImageInterface[]> = useFetchImages();
 
     if (fetchImagesQuery.isLoading) return 'Loading...'
-    if (fetchImagesQuery.isError) return 'An error has occurred: ' + fetchImagesQuery.error.message
+    if (fetchImagesQuery.isError) return 'An error has occurred: ' + fetchImagesQuery.error
 
     return <>
         <div className="container row">

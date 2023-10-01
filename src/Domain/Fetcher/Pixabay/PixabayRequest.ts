@@ -18,7 +18,6 @@ const ImagesListSchema = z.object({
     hits: z.array(ImageSchema)
 });
 
-type ImagesListResponse = z.infer<typeof ImagesListSchema>;
 type ImageSchema = z.infer<typeof ImageSchema>;
 
 export function useFetchImages() {
