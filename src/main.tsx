@@ -7,7 +7,7 @@ import {QueryClient, QueryClientProvider} from "@tanstack/react-query";
 const queryClient = new QueryClient();
 
 // @todo:
-// 1. react router (add "about" page")
+// - 1. react router (add "about" page")
 // 2. react hook form (allow to search by name)
 // 3. test form
 // 4. test query api
