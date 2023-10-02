@@ -1,7 +1,6 @@
 import {render, screen} from "@testing-library/react";
 import Image from "../../../src/Domain/Image/Image";
 import {ImageInterface} from "../../../src/Domain/Image/ImageInterface";
-import {expect} from "vitest";
 
 test('App', async () => {
     const sampleImage: ImageInterface = {

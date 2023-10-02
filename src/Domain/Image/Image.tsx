@@ -2,14 +2,22 @@ import {ImageInterface} from "./ImageInterface.ts";
 
 function Image({webformatURL, previewURL, id, user, type}: ImageInterface) {
     return <>
-        <div className="card" style={{width: "18rem"}}>
-            <img className="card-img-top" src={previewURL} alt={user} width={100}/>
-            <div className="card-body">
-                <h5 className="card-title">{id} - {type}</h5>
-                <p className="card-text">{user}</p>
-                <a href={webformatURL} className="btn btn-primary">Go somewhere</a>
+        <div className="col">
+            <div className="card shadow-sm">
+                <img className="bd-placeholder-img card-img-top" width="100%" height="225" src={previewURL} alt={user} />
+
+                <div className="card-body">
+                    <p className="card-text">{id} - {type}</p>
+                    <div className="d-flex justify-content-between align-items-center">
+                        <div className="btn-group">
+                            <a href={webformatURL}><button type="button" className="btn btn-sm btn-outline-secondary">View</button></a>
+                            <button type="button" className="btn btn-sm btn-outline-secondary">Edit</button>
+                        </div>
+                    </div>
+                </div>
             </div>
         </div>
+
     </>
 }
 
