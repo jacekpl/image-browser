@@ -13,6 +13,7 @@ function Image({webformatURL, previewURL, id, user, type}: ImageInterface) {
                             <a href={webformatURL}><button type="button" className="btn btn-sm btn-outline-secondary">View</button></a>
                             <button type="button" className="btn btn-sm btn-outline-secondary">Edit</button>
                         </div>
+                        <small className="text-muted">{user}</small>
                     </div>
                 </div>
             </div>
