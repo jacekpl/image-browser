@@ -4,7 +4,7 @@ import {ImageInterface} from "../../../src/Domain/Image/ImageInterface";
 import {expect} from "vitest";
 
 test('App', async () => {
-    let sampleImage: ImageInterface = {
+    const sampleImage: ImageInterface = {
         id: 123456,
         previewURL: "preview=-url",
         type: "type-x",
